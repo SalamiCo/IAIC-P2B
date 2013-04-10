@@ -1,5 +1,6 @@
 package iaic.p2b;
 
+import iaic.p2b.gui.Interfaz;
 import jess.Deffacts;
 import jess.Fact;
 import jess.JessException;
@@ -31,37 +32,65 @@ public class Main {
 		}
 	}
 	
+	public static void run(){
+		try{
+			miRete.run();
+		} catch (JessException je) {
+			System.out.println("Error al ejecutar el modulo");
+			je.printStackTrace();
+		}
+	}
+	
+	public static void reset(){
+		try{
+			miRete.reset();
+		} catch (JessException je) {
+			System.out.println("Error al hacer reset");
+			je.printStackTrace();
+		}
+	}
+	
+	public static void halt(){
+		try{
+			miRete.halt();
+		} catch (JessException je) {
+			System.out.println("Error al hacer halt");
+			je.printStackTrace();
+		}
+	}
+	
 	public static void main(String[] args) throws JessException {
 		Main programa = new Main();
+		
+		Interfaz interfaz = new Interfaz();
+		interfaz.setVisible(true);
 		
 		Deffacts deffacts = new Deffacts("usuarios", null, miRete);
 		Fact f = new Fact("persona", miRete);
 		f.setSlotValue("nombre", new Value("Pene", RU.SYMBOL));
 		f.setSlotValue("sexo", new Value("hombre", RU.SYMBOL));
-		f.setSlotValue("edad", new Value(20, RU.NUMBER));
-		f.setSlotValue("altura", new Value(20, RU.NUMBER));
-		f.setSlotValue("peso", new Value(20, RU.NUMBER));
+		f.setSlotValue("edad", new Value(20, RU.INTEGER));
+		f.setSlotValue("altura", new Value(20, RU.INTEGER));
+		f.setSlotValue("peso", new Value(20, RU.INTEGER));
 		f.setSlotValue("cuestaHablar", new Value("FALSE", RU.SYMBOL));
 		f.setSlotValue("gustaSalir", new Value("TRUE", RU.SYMBOL));
-		f.setSlotValue("numAmigos", new Value(20, RU.NUMBER));
+		f.setSlotValue("numAmigos", new Value(20, RU.INTEGER));
 		f.setSlotValue("religion", new Value("ateo", RU.SYMBOL));
 		f.setSlotValue("twitter", new Value("TRUE", RU.SYMBOL));
 		f.setSlotValue("facebook", new Value("TRUE", RU.SYMBOL));
 		deffacts.addFact(f);
 		miRete.addDeffacts(deffacts);
 		
-		miRete.reset();
+		reset();
 		
 		miRete.setFocus("clasificar");
-		miRete.run();
+		run();
 		miRete.setFocus("compatibilizar");
-		miRete.run();
+		run();
 		miRete.setFocus("citar");
-		miRete.run();
-		miRete.setFocus("mostrar");
-		miRete.run();
+		run();
 		
-		miRete.halt();
+		halt();
 	}
 
 }

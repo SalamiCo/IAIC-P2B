@@ -1,24 +1,24 @@
 package iaic.p2b.gui;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.UIManager;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.factories.FormFactory;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import com.jgoodies.forms.factories.FormFactory;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.RowSpec;
 
 public class Interfaz extends JFrame {
 
@@ -30,7 +30,7 @@ public class Interfaz extends JFrame {
 	private JLabel lblAltura;
 	private JLabel lblPeso;
 	private JLabel lblNAmigos;
-	private JLabel lblReligin;
+	private JLabel lblReligion;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
@@ -44,10 +44,7 @@ public class Interfaz extends JFrame {
 	private JCheckBox chckbxtienesTwitter;
 	private JCheckBox chckbxtienesFacebook;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -58,7 +55,7 @@ public class Interfaz extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
@@ -148,8 +145,8 @@ public class Interfaz extends JFrame {
 		panel.add(textField_5, "4, 12, fill, default");
 		textField_5.setColumns(10);
 		
-		lblReligin = new JLabel("Religi\u00F3n");
-		panel.add(lblReligin, "2, 14, right, default");
+		lblReligion = new JLabel("Religi\u00F3n");
+		panel.add(lblReligion, "2, 14, right, default");
 		
 		textField_6 = new JTextField();
 		panel.add(textField_6, "4, 14, fill, default");
@@ -169,8 +166,13 @@ public class Interfaz extends JFrame {
 		
 		btnCitar = new JButton("Citar");
 		panel.add(btnCitar, "2, 24, 3, 1");
+		btnCitar.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 		
-		TableModel model = new DefaultTableModel(5, 2);
 		table = new JTable(new DefaultTableModel(
 			new Object[][] {
 			},
