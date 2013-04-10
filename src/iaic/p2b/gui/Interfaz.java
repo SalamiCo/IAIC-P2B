@@ -1,5 +1,8 @@
 package iaic.p2b.gui;
 
+import iaic.p2b.Main;
+import iaic.p2b.Persona;
+
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,47 +18,39 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import jess.JessException;
+
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
+@SuppressWarnings("serial")
 public class Interfaz extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-	private JLabel lblNombre;
-	private JLabel lblSexo;
-	private JLabel lblEdad;
-	private JLabel lblAltura;
-	private JLabel lblPeso;
-	private JLabel lblNAmigos;
-	private JLabel lblReligion;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JButton btnCitar;
-	private JCheckBox chckbxteCuestaHablar;
-	private JCheckBox chckbxteGustaSalir;
-	private JCheckBox chckbxtienesTwitter;
-	private JCheckBox chckbxtienesFacebook;
-
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Interfaz frame = new Interfaz();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
+	private JLabel labelNombre;
+	private JLabel labelSexo;
+	private JLabel labelEdad;
+	private JLabel labelAltura;
+	private JLabel labelPeso;
+	private JLabel labelNumAmigos;
+	private JLabel labelReligion;
+	private JTextField textFieldNombre;
+	private JTextField textFieldSexo;
+	private JTextField textFieldEdad;
+	private JTextField textFieldAltura;
+	private JTextField textFieldPeso;
+	private JTextField textFieldNumAmigos;
+	private JTextField textFieldReligion;
+	private JButton botonCitar;
+	private JCheckBox checkboxCuestaHablar;
+	private JCheckBox checkboxGustaSalir;
+	private JCheckBox checkboxTwitter;
+	private JCheckBox checkboxFacebook;
+	
+	private Persona persona;
 
 	/**
 	 * Create the frame.
@@ -103,73 +98,92 @@ public class Interfaz extends JFrame {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
-		lblNombre = new JLabel("Nombre");
-		panel.add(lblNombre, "2, 2, right, default");
+		labelNombre = new JLabel("Nombre");
+		panel.add(labelNombre, "2, 2, right, default");
 		
-		textField = new JTextField();
-		panel.add(textField, "4, 2, fill, default");
-		textField.setColumns(10);
+		textFieldNombre = new JTextField();
+		panel.add(textFieldNombre, "4, 2, fill, default");
+		textFieldNombre.setColumns(10);
 		
-		lblSexo = new JLabel("Sexo");
-		panel.add(lblSexo, "2, 4, right, default");
+		labelSexo = new JLabel("Sexo");
+		panel.add(labelSexo, "2, 4, right, default");
 		
-		textField_1 = new JTextField();
-		panel.add(textField_1, "4, 4, fill, default");
-		textField_1.setColumns(10);
+		textFieldSexo = new JTextField();
+		panel.add(textFieldSexo, "4, 4, fill, default");
+		textFieldSexo.setColumns(10);
 		
-		lblEdad = new JLabel("Edad");
-		panel.add(lblEdad, "2, 6, right, default");
+		labelEdad = new JLabel("Edad");
+		panel.add(labelEdad, "2, 6, right, default");
 		
-		textField_2 = new JTextField();
-		panel.add(textField_2, "4, 6, fill, default");
-		textField_2.setColumns(10);
+		textFieldEdad = new JTextField();
+		panel.add(textFieldEdad, "4, 6, fill, default");
+		textFieldEdad.setColumns(10);
 		
-		lblAltura = new JLabel("Altura");
-		panel.add(lblAltura, "2, 8, right, default");
+		labelAltura = new JLabel("Altura");
+		panel.add(labelAltura, "2, 8, right, default");
 		
-		textField_3 = new JTextField();
-		panel.add(textField_3, "4, 8, fill, default");
-		textField_3.setColumns(10);
+		textFieldAltura = new JTextField();
+		panel.add(textFieldAltura, "4, 8, fill, default");
+		textFieldAltura.setColumns(10);
 		
-		lblPeso = new JLabel("Peso");
-		panel.add(lblPeso, "2, 10, right, default");
+		labelPeso = new JLabel("Peso");
+		panel.add(labelPeso, "2, 10, right, default");
 		
-		textField_4 = new JTextField();
-		panel.add(textField_4, "4, 10, fill, default");
-		textField_4.setColumns(10);
+		textFieldPeso = new JTextField();
+		panel.add(textFieldPeso, "4, 10, fill, default");
+		textFieldPeso.setColumns(10);
 		
-		lblNAmigos = new JLabel("N\u00BA Amigos");
-		panel.add(lblNAmigos, "2, 12, right, default");
+		labelNumAmigos = new JLabel("N\u00BA Amigos");
+		panel.add(labelNumAmigos, "2, 12, right, default");
 		
-		textField_5 = new JTextField();
-		panel.add(textField_5, "4, 12, fill, default");
-		textField_5.setColumns(10);
+		textFieldNumAmigos = new JTextField();
+		panel.add(textFieldNumAmigos, "4, 12, fill, default");
+		textFieldNumAmigos.setColumns(10);
 		
-		lblReligion = new JLabel("Religi\u00F3n");
-		panel.add(lblReligion, "2, 14, right, default");
+		labelReligion = new JLabel("Religi\u00F3n");
+		panel.add(labelReligion, "2, 14, right, default");
 		
-		textField_6 = new JTextField();
-		panel.add(textField_6, "4, 14, fill, default");
-		textField_6.setColumns(10);
+		textFieldReligion = new JTextField();
+		panel.add(textFieldReligion, "4, 14, fill, default");
+		textFieldReligion.setColumns(10);
 		
-		chckbxteCuestaHablar = new JCheckBox("\u00BFTe cuesta hablar?");
-		panel.add(chckbxteCuestaHablar, "2, 16, 3, 1");
+		checkboxCuestaHablar = new JCheckBox("\u00BFTe cuesta hablar?");
+		panel.add(checkboxCuestaHablar, "2, 16, 3, 1");
 		
-		chckbxteGustaSalir = new JCheckBox("\u00BFTe gusta salir?");
-		panel.add(chckbxteGustaSalir, "2, 18, 3, 1");
+		checkboxGustaSalir = new JCheckBox("\u00BFTe gusta salir?");
+		panel.add(checkboxGustaSalir, "2, 18, 3, 1");
 		
-		chckbxtienesTwitter = new JCheckBox("\u00BFTienes Twitter?");
-		panel.add(chckbxtienesTwitter, "2, 20, 3, 1");
+		checkboxTwitter = new JCheckBox("\u00BFTienes Twitter?");
+		panel.add(checkboxTwitter, "2, 20, 3, 1");
 		
-		chckbxtienesFacebook = new JCheckBox("\u00BFTienes Facebook?");
-		panel.add(chckbxtienesFacebook, "2, 22, 3, 1");
+		checkboxFacebook = new JCheckBox("\u00BFTienes Facebook?");
+		panel.add(checkboxFacebook, "2, 22, 3, 1");
 		
-		btnCitar = new JButton("Citar");
-		panel.add(btnCitar, "2, 24, 3, 1");
-		btnCitar.addActionListener(new ActionListener(){
+		botonCitar = new JButton("Citar");
+		panel.add(botonCitar, "2, 24, 3, 1");
+		botonCitar.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				String nombre = textFieldNombre.getText();
+				String sexo = textFieldSexo.getText();
+				int edad = Integer.parseInt(textFieldEdad.getText());
+				int altura = Integer.parseInt(textFieldAltura.getText());
+				int peso = Integer.parseInt(textFieldPeso.getText());
+				int numAmigos = Integer.parseInt(textFieldNumAmigos.getText());
+				String religion = textFieldReligion.getText();
+				String cuestaHablar = (checkboxCuestaHablar.isSelected() ? "TRUE" : "FALSE" );
+				String gustaSalir = (checkboxGustaSalir.isSelected() ? "TRUE" : "FALSE" );
+				String twitter = (checkboxTwitter.isSelected() ? "TRUE" : "FALSE" );
+				String facebook = (checkboxFacebook.isSelected() ? "TRUE" : "FALSE" );
 				
+				persona = new Persona(nombre, sexo, edad, altura, peso, cuestaHablar, gustaSalir, numAmigos, religion, twitter, facebook);
+				
+				try {
+					Main.citar(persona);
+				} catch (JessException e) {
+					System.out.println("Error al citar");
+					e.printStackTrace();
+				}
 			}
 		});
 		
@@ -185,5 +199,5 @@ public class Interfaz extends JFrame {
 		
 		pack();
 	}
-
+	
 }

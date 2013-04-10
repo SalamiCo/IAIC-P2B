@@ -15,12 +15,6 @@ public class Main {
 	//Nombre del archivo .clp que contiene el código Jess
 	private static String archivoJess;
 	
-	public Main(){
-		miRete = new Rete();
-		archivoJess = "jess.clp";
-		cargaPrograma(archivoJess);
-	}
-	
 	public static void cargaPrograma(String nombre) {
 		try {
 			Value v = miRete.batch(nombre);
@@ -59,25 +53,20 @@ public class Main {
 		}
 	}
 	
-	public static void main(String[] args) throws JessException {
-		Main programa = new Main();
-		
-		Interfaz interfaz = new Interfaz();
-		interfaz.setVisible(true);
-		
+	public static void citar(Persona persona) throws JessException {
 		Deffacts deffacts = new Deffacts("usuarios", null, miRete);
 		Fact f = new Fact("persona", miRete);
-		f.setSlotValue("nombre", new Value("Pene", RU.SYMBOL));
-		f.setSlotValue("sexo", new Value("hombre", RU.SYMBOL));
-		f.setSlotValue("edad", new Value(20, RU.INTEGER));
-		f.setSlotValue("altura", new Value(20, RU.INTEGER));
-		f.setSlotValue("peso", new Value(20, RU.INTEGER));
-		f.setSlotValue("cuestaHablar", new Value("FALSE", RU.SYMBOL));
-		f.setSlotValue("gustaSalir", new Value("TRUE", RU.SYMBOL));
-		f.setSlotValue("numAmigos", new Value(20, RU.INTEGER));
-		f.setSlotValue("religion", new Value("ateo", RU.SYMBOL));
-		f.setSlotValue("twitter", new Value("TRUE", RU.SYMBOL));
-		f.setSlotValue("facebook", new Value("TRUE", RU.SYMBOL));
+		f.setSlotValue("nombre", new Value(persona.getNombre(), RU.SYMBOL));
+		f.setSlotValue("sexo", new Value(persona.getSexo(), RU.SYMBOL));
+		f.setSlotValue("edad", new Value(persona.getEdad(), RU.INTEGER));
+		f.setSlotValue("altura", new Value(persona.getAltura(), RU.INTEGER));
+		f.setSlotValue("peso", new Value(persona.getPeso(), RU.INTEGER));
+		f.setSlotValue("cuestaHablar", new Value(persona.getCuestaHablar(), RU.SYMBOL));
+		f.setSlotValue("gustaSalir", new Value(persona.getGustaSalir(), RU.SYMBOL));
+		f.setSlotValue("numAmigos", new Value(persona.getNumAmigos(), RU.INTEGER));
+		f.setSlotValue("religion", new Value(persona.getReligion(), RU.SYMBOL));
+		f.setSlotValue("twitter", new Value(persona.getTwitter(), RU.SYMBOL));
+		f.setSlotValue("facebook", new Value(persona.getFacebook(), RU.SYMBOL));
 		deffacts.addFact(f);
 		miRete.addDeffacts(deffacts);
 		
@@ -89,8 +78,19 @@ public class Main {
 		run();
 		miRete.setFocus("citar");
 		run();
+		miRete.setFocus("mostrar");
+		run();
 		
 		halt();
+	}
+	
+	public static void main(String[] args) {
+		miRete = new Rete();
+		archivoJess = "jess.clp";
+		cargaPrograma(archivoJess);
+
+		Interfaz interfaz = new Interfaz();
+		interfaz.setVisible(true);
 	}
 
 }
