@@ -184,6 +184,8 @@ public class Interfaz extends JFrame {
 					System.out.println("Error al citar");
 					e.printStackTrace();
 				}
+				
+				Main.mostrarCitas(persona);
 			}
 		});
 		

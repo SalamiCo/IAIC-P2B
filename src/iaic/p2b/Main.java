@@ -1,6 +1,9 @@
 package iaic.p2b;
 
 import iaic.p2b.gui.Interfaz;
+
+import java.util.Iterator;
+
 import jess.Deffacts;
 import jess.Fact;
 import jess.JessException;
@@ -82,6 +85,13 @@ public class Main {
 		run();
 		
 		halt();
+	}
+	
+	public static void mostrarCitas(Persona persona) {
+		Iterator iterador = miRete.listFacts();
+		while (iterador.hasNext()) {
+			System.out.println(iterador.next());
+		}
 	}
 	
 	public static void main(String[] args) {
