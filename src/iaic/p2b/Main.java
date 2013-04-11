@@ -89,22 +89,35 @@ public class Main {
 		halt();
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public static DefaultTableModel mostrarCitas(Persona persona) throws JessException {
 		DefaultTableModel modelo = new DefaultTableModel();
 		modelo.addColumn("Nombre");
 		modelo.addColumn("Tipo de cita");
+		
+		Object [] datosFila = new Object[2];
+		
 		Iterator it = miRete.listFacts();
 		while (it.hasNext()) {
 			Fact f = (Fact) it.next();
 			if(f.getName().equals("MAIN::emparejamiento")){
-				String tipoCita = f.getSlotValue("tipoCita").stringValue(miRete.getGlobalContext());
+				String tipoCita = "";
+				if(f.getSlotValue("tipoCita").stringValue(miRete.getGlobalContext()).equals("sinCita")){
+					tipoCita = "Compatibles";
+				} else if (f.getSlotValue("tipoCita").stringValue(miRete.getGlobalContext()).equals("citaNormal")){
+					tipoCita = "Cita normal";
+				} else if(f.getSlotValue("tipoCita").stringValue(miRete.getGlobalContext()).equals("citaMagica")){
+					tipoCita = "Cita mágica";
+				}
 				
 				String nombre1 = f.getSlotValue("nombre1").stringValue(miRete.getGlobalContext());
 				String nombre2 = f.getSlotValue("nombre2").stringValue(miRete.getGlobalContext());
 				
-				Object [] datosFila;
-				if (nombre1.equals(persona.getNombre()) || nombre2.equals(persona.getNombre())){
-					datosFila = new Object[2];
+				if (nombre1.equals(persona.getNombre())){
+					datosFila[0] = nombre2;
+					datosFila[1] = tipoCita;
+					modelo.addRow(datosFila);
+				} else if (nombre2.equals(persona.getNombre())){
 					datosFila[0] = nombre1;
 					datosFila[1] = tipoCita;
 					modelo.addRow(datosFila);

@@ -17,6 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import jess.JessException;
 
@@ -48,11 +49,13 @@ public class Interfaz extends JFrame {
 	private JCheckBox checkboxGustaSalir;
 	private JCheckBox checkboxTwitter;
 	private JCheckBox checkboxFacebook;
+	private JScrollPane scrollPane;
+	private JTable table;
+	private DefaultTableModel modelo;
+
 	
 	private Persona persona;
-	private JTable table;
-	private JScrollPane scrollPane;
-
+	
 	/**
 	 * Create the frame.
 	 */
@@ -66,6 +69,7 @@ public class Interfaz extends JFrame {
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
+		contentPane.setPreferredSize(new Dimension(500, 360));
 		panel.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
@@ -165,9 +169,14 @@ public class Interfaz extends JFrame {
 		
 		scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.EAST);
+		scrollPane.setPreferredSize(new Dimension(250, 300));
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		modelo = new DefaultTableModel();
+		modelo.addColumn("Nombre");
+		modelo.addColumn("Tipo de cita");
+		table.setModel(modelo);
 		
 		botonCitar.addActionListener(new ActionListener(){
 			@Override
@@ -195,7 +204,6 @@ public class Interfaz extends JFrame {
 				
 				try {
 					table.setModel(Main.mostrarCitas(persona));
-					table.setPreferredScrollableViewportSize(new Dimension(300, 300));
 				} catch (JessException e) {
 					System.out.println("Error al mostrar citas");
 					e.printStackTrace();
