@@ -4,6 +4,7 @@ import iaic.p2b.Main;
 import iaic.p2b.Persona;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,11 +13,10 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
 
 import jess.JessException;
 
@@ -29,7 +29,6 @@ import com.jgoodies.forms.layout.RowSpec;
 public class Interfaz extends JFrame {
 
 	private JPanel contentPane;
-	private JTable table;
 	private JLabel labelNombre;
 	private JLabel labelSexo;
 	private JLabel labelEdad;
@@ -51,13 +50,15 @@ public class Interfaz extends JFrame {
 	private JCheckBox checkboxFacebook;
 	
 	private Persona persona;
+	private JTable table;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Create the frame.
 	 */
 	public Interfaz() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 364, 420);
+		setBounds(100, 100, 502, 389);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -161,6 +162,13 @@ public class Interfaz extends JFrame {
 		
 		botonCitar = new JButton("Citar");
 		panel.add(botonCitar, "2, 24, 3, 1");
+		
+		scrollPane = new JScrollPane();
+		contentPane.add(scrollPane, BorderLayout.EAST);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		
 		botonCitar.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -185,19 +193,15 @@ public class Interfaz extends JFrame {
 					e.printStackTrace();
 				}
 				
-				Main.mostrarCitas(persona);
+				try {
+					table.setModel(Main.mostrarCitas(persona));
+					table.setPreferredScrollableViewportSize(new Dimension(300, 300));
+				} catch (JessException e) {
+					System.out.println("Error al mostrar citas");
+					e.printStackTrace();
+				}
 			}
 		});
-		
-		table = new JTable(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Nombre", "Tipo de cita"
-			}
-		));
-		table.setBorder(UIManager.getBorder("Table.scrollPaneBorder"));
-		contentPane.add(table, BorderLayout.EAST);
 		
 		pack();
 	}

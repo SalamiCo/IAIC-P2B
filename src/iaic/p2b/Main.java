@@ -4,6 +4,8 @@ import iaic.p2b.gui.Interfaz;
 
 import java.util.Iterator;
 
+import javax.swing.table.DefaultTableModel;
+
 import jess.Deffacts;
 import jess.Fact;
 import jess.JessException;
@@ -87,11 +89,29 @@ public class Main {
 		halt();
 	}
 	
-	public static void mostrarCitas(Persona persona) {
-		Iterator iterador = miRete.listFacts();
-		while (iterador.hasNext()) {
-			System.out.println(iterador.next());
+	public static DefaultTableModel mostrarCitas(Persona persona) throws JessException {
+		DefaultTableModel modelo = new DefaultTableModel();
+		modelo.addColumn("Nombre");
+		modelo.addColumn("Tipo de cita");
+		Iterator it = miRete.listFacts();
+		while (it.hasNext()) {
+			Fact f = (Fact) it.next();
+			if(f.getName().equals("MAIN::emparejamiento")){
+				String tipoCita = f.getSlotValue("tipoCita").stringValue(miRete.getGlobalContext());
+				
+				String nombre1 = f.getSlotValue("nombre1").stringValue(miRete.getGlobalContext());
+				String nombre2 = f.getSlotValue("nombre2").stringValue(miRete.getGlobalContext());
+				
+				Object [] datosFila;
+				if (nombre1.equals(persona.getNombre()) || nombre2.equals(persona.getNombre())){
+					datosFila = new Object[2];
+					datosFila[0] = nombre1;
+					datosFila[1] = tipoCita;
+					modelo.addRow(datosFila);
+				}
+			}
 		}
+		return modelo;
 	}
 	
 	public static void main(String[] args) {
