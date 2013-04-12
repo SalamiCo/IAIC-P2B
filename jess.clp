@@ -62,7 +62,7 @@
 
 	(persona (nombre "Herminia") (sexo mujer) (edad 30) (altura 180) (peso 80) (cuestaHablar FALSE) (gustaSalir FALSE) (numAmigos 12) (religion ateo) (twitter FALSE) (facebook TRUE))
 
-	(persona (nombre "Wamba") (sexo hombre) (edad 101) (altura 140) (peso 38) (cuestaHablar TRUE) (gustaSalir TRUE) (numAmigos 0) (religion visigodo) (twitter FALSE) (facebook FALSE))
+	(persona (nombre "Wamba") (sexo hombre) (edad 101) (altura 140) (peso 38) (cuestaHablar TRUE) (gustaSalir TRUE) (numAmigos 0) (religion judio) (twitter FALSE) (facebook FALSE))
 
 	(persona (nombre "Theodora") (sexo mujer) (edad 19) (altura 167) (peso 58) (cuestaHablar TRUE) (gustaSalir FALSE) (numAmigos 2) (religion cristiano) (twitter FALSE) (facebook TRUE))
 
@@ -80,15 +80,15 @@
 
 	(persona (nombre "Nacho") (sexo hombre) (edad 38) (altura 185) (peso 85) (cuestaHablar FALSE) (gustaSalir TRUE) (numAmigos 250) (religion ateo) (twitter TRUE) (facebook TRUE))
 
-	(persona (nombre "Tenia") (sexo mujer) (edad 67) (altura 190) (peso 70) (cuestaHablar TRUE) (gustaSalir FALSE) (numAmigos 1) (religion jehova) (twitter FALSE) (facebook FALSE))
+	(persona (nombre "Tenia") (sexo mujer) (edad 67) (altura 190) (peso 70) (cuestaHablar TRUE) (gustaSalir FALSE) (numAmigos 1) (religion judio) (twitter FALSE) (facebook FALSE))
 
 	(persona (nombre "Julio") (sexo hombre) (edad 56) (altura 169) (peso 75) (cuestaHablar TRUE) (gustaSalir FALSE) (numAmigos 3) (religion cristiano) (twitter FALSE) (facebook TRUE))
 
 	(persona (nombre "Maria") (sexo mujer) (edad 30) (altura 165) (peso 60) (cuestaHablar FALSE) (gustaSalir TRUE) (numAmigos 15) (religion ateo) (twitter FALSE) (facebook TRUE))
 
-	(persona (nombre "Junkpilwon") (sexo hombre) (edad 45) (altura 156) (peso 55) (cuestaHablar TRUE) (gustaSalir TRUE) (numAmigos 27) (religion tahoismo) (twitter TRUE) (facebook TRUE))
+	(persona (nombre "Junkpilwon") (sexo hombre) (edad 45) (altura 156) (peso 55) (cuestaHablar TRUE) (gustaSalir TRUE) (numAmigos 27) (religion judio) (twitter TRUE) (facebook TRUE))
 
-	(persona (nombre "Minjoo") (sexo mujer) (edad 18) (altura 146) (peso 40) (cuestaHablar FALSE) (gustaSalir FALSE) (numAmigos 50) (religion sintohismo) (twitter TRUE) (facebook TRUE))
+	(persona (nombre "Minjoo") (sexo mujer) (edad 18) (altura 146) (peso 40) (cuestaHablar FALSE) (gustaSalir FALSE) (numAmigos 50) (religion judio) (twitter TRUE) (facebook TRUE))
 
 	(persona (nombre "Groucho") (sexo hombre) (edad 76) (altura 177) (peso 70) (cuestaHablar FALSE) (gustaSalir FALSE) (numAmigos 75) (religion ateo) (twitter TRUE) (facebook FALSE))
 

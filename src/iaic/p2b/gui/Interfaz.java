@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -38,18 +39,18 @@ public class Interfaz extends JFrame {
 	private JLabel labelNumAmigos;
 	private JLabel labelReligion;
 	private JTextField textFieldNombre;
-	private JTextField textFieldSexo;
 	private JTextField textFieldEdad;
 	private JTextField textFieldAltura;
 	private JTextField textFieldPeso;
 	private JTextField textFieldNumAmigos;
-	private JTextField textFieldReligion;
 	private JButton botonCitar;
 	private JCheckBox checkboxCuestaHablar;
 	private JCheckBox checkboxGustaSalir;
 	private JCheckBox checkboxTwitter;
 	private JCheckBox checkboxFacebook;
 	private JScrollPane scrollPane;
+	private JComboBox<String> comboBoxSexo;
+	private JComboBox<String> comboBoxReligion;
 	private JTable table;
 	private DefaultTableModel modelo;
 
@@ -61,6 +62,7 @@ public class Interfaz extends JFrame {
 	 */
 	public Interfaz() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("IAIC-P2B");
 		setBounds(100, 100, 502, 389);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -68,8 +70,8 @@ public class Interfaz extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
-		contentPane.add(panel, BorderLayout.CENTER);
-		contentPane.setPreferredSize(new Dimension(500, 360));
+		contentPane.add(panel, BorderLayout.WEST);
+		contentPane.setPreferredSize(new Dimension(480, 380));
 		panel.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
@@ -113,9 +115,9 @@ public class Interfaz extends JFrame {
 		labelSexo = new JLabel("Sexo");
 		panel.add(labelSexo, "2, 4, right, default");
 		
-		textFieldSexo = new JTextField();
-		panel.add(textFieldSexo, "4, 4, fill, default");
-		textFieldSexo.setColumns(10);
+		String[] arraySexo = {"hombre","mujer"};
+		comboBoxSexo = new JComboBox<String>(arraySexo);
+		panel.add(comboBoxSexo, "4, 4, fill, default");
 		
 		labelEdad = new JLabel("Edad");
 		panel.add(labelEdad, "2, 6, right, default");
@@ -148,9 +150,9 @@ public class Interfaz extends JFrame {
 		labelReligion = new JLabel("Religi\u00F3n");
 		panel.add(labelReligion, "2, 14, right, default");
 		
-		textFieldReligion = new JTextField();
-		panel.add(textFieldReligion, "4, 14, fill, default");
-		textFieldReligion.setColumns(10);
+		String[] arrayReligion = {"ateo", "cristiano", "judio"};
+		comboBoxReligion = new JComboBox<String>(arrayReligion);
+		panel.add(comboBoxReligion, "4, 14, fill, default");
 		
 		checkboxCuestaHablar = new JCheckBox("\u00BFTe cuesta hablar?");
 		panel.add(checkboxCuestaHablar, "2, 16, 3, 1");
@@ -182,12 +184,12 @@ public class Interfaz extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				String nombre = textFieldNombre.getText();
-				String sexo = textFieldSexo.getText();
+				String sexo = comboBoxSexo.getSelectedItem().toString();
 				int edad = Integer.parseInt(textFieldEdad.getText());
 				int altura = Integer.parseInt(textFieldAltura.getText());
 				int peso = Integer.parseInt(textFieldPeso.getText());
 				int numAmigos = Integer.parseInt(textFieldNumAmigos.getText());
-				String religion = textFieldReligion.getText();
+				String religion = comboBoxReligion.getSelectedItem().toString();
 				String cuestaHablar = (checkboxCuestaHablar.isSelected() ? "TRUE" : "FALSE" );
 				String gustaSalir = (checkboxGustaSalir.isSelected() ? "TRUE" : "FALSE" );
 				String twitter = (checkboxTwitter.isSelected() ? "TRUE" : "FALSE" );
